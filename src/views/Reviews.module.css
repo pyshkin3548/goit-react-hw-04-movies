@@ -1,0 +1,9 @@
+.ListItem {
+    display: inline-block;
+    list-style: none;
+  }
+
+.Author {
+  font-weight: 700 ;
+
+}
