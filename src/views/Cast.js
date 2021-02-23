@@ -11,7 +11,7 @@ export default class Cast extends Component {
   componentDidMount() {
     // console.log(movieId)
     API.fetchMovieCredits(this.props.match.params.movieId)
-      .then(console.log(this.props.match.params))
+      // .then(console.log(this.props.match.params))
       .then(credits => {
         this.setState({
            credits

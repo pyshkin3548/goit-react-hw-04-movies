@@ -8,6 +8,17 @@ export default class MoviesPage extends Component {
   state = {
     movies: [],
   };
+
+  componentDidMount() {
+    const { query } = getQueryParams(this.props.location.search);
+       
+    if (query) {
+       
+        this.fetchMovies(query);
+    };
+  }
+  
+
   componentDidUpdate(prevProps, prevState) {
     const { query: prevQuery } = getQueryParams(prevProps.location.search);
     const { query: nextQuery } = getQueryParams(this.props.location.search);
@@ -24,6 +35,7 @@ export default class MoviesPage extends Component {
   handleChangeQuery = (query) => {
     this.props.history.push({
       pathname: this.props.location.pathname,
+      // ...this.props.location,
       search: `query=${query}`,
     });
   };

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Route, Switch, Link } from 'react-router-dom';
+import { Route, Switch, NavLink } from 'react-router-dom';
 import routes from '../routes'
 import  API from "../services/api";
 import styles from './MoviesDetailsPage.module.css';
@@ -17,7 +17,6 @@ state = {
   componentDidMount() {
     API
       .fetchMovieDetails(this.props.match.params.movieId)
-      // .then(console.log(this.props.match.params))
         .then((movie) => this.setState({ movie }))
 
   }
@@ -25,17 +24,22 @@ state = {
 
 
   handleGoBack = (e) => {
-    console.log("back!!!");
+
     this.props.history.push("/movies");
 
     const { state } = this.props.location;
 
     if (state && state.from) {
-    // if (state) {
+
       return this.props.history.push(state.from);
     }
     this.props.history.push(routes.home)
   };
+
+  // handleGoBack = () => {
+  //   const { location, history } = this.props;
+  //   history.push(location?.state?.from || routes.home);
+  // };
 
   render() {
     const {
@@ -85,23 +89,25 @@ state = {
 
           <section className={styles.addInfoSection}>
           <p className={styles.bold}>Additional information</p>
-          <Link
+          <NavLink
             className={styles.addInfo}
             to={{ pathname: `/movies/${id}/cast`}}
-            // to={{ pathname: `${match.path}/cast`}}
+            // to={`${match.path}${id}/cast`}
           >
             Cast
-          </Link>
-          <Link
+          </NavLink>
+          <NavLink
             className={styles.addInfo}
             to={{ pathname: `/movies/${id}/reviews` }}
           >
             Reviews
-          </Link>
+          </NavLink>
         </section>
         <Switch> 
           <Route path={`${match.path}/cast`} component={Cast} />
+          {/* <Route path={routes.Cast} component={Cast} /> */}
           <Route path={`${match.path}/reviews`} component={Reviews} /> 
+          {/* <Route path={routes.Reviews} component={Reviews} />  */}
   </Switch>
       </div>
     );
